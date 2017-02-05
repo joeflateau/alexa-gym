@@ -13,6 +13,8 @@ let offsets = {
   "PT":3
 };
 
+let streetToState = (title) => title.replace(/\bSt\b/i, "State");
+
 function getTodaysStreams(){
   return rp({
     uri:'https://www.collegegymfans.com/',
@@ -36,7 +38,7 @@ function getTodaysStreams(){
       let title = $(tds[0]).text();
 
       let object = ({
-        title: title,
+        title: streetToState(title),
         time: relativeTime,
         site: site
       });
