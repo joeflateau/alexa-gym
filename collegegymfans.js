@@ -2,6 +2,17 @@ let cheerio = require('cheerio');
 let rp = require('request-promise');
 let URI = require('urijs');
 
+let debug = require('debug')('alexa-gym:collegegymfans');
+
+let moment = require('moment');
+
+let offsets = {
+  "ET":0,
+  "CT":1,
+  "MT":2,
+  "PT":3
+};
+
 function getTodaysStreams(){
   return rp({
     uri:'https://www.collegegymfans.com/',
@@ -14,11 +25,22 @@ function getTodaysStreams(){
       let tds = $(tr).children().get();
       let streamUrl = $(tds[3]).find("a").attr("href");
       let time = $(tds[1]).text();
+      let [ relativeTime, zone ] = time.split(" ");
+      
+      debug(zone);
+      if (offsets.hasOwnProperty(zone)) {
+        relativeTime = moment(relativeTime, 'H:mm Z').add(offsets[zone], 'hours').format('H:mm');
+      } 
+
+      let site = URI(streamUrl).hostname().replace(/^www[.]/i, "");
+      let title = $(tds[0]).text();
+
       let object = ({
-        title: $(tds[0]).text(),
-        time: time,
-        site: URI(streamUrl).hostname().replace(/^www[.]/i, "")
+        title: title,
+        time: relativeTime,
+        site: site
       });
+
       return object;
     });
     return grid;

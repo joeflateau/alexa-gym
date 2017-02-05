@@ -10,8 +10,7 @@ function setup(name) {
       .then((streams) => {
         let streamText = streams.map(stream => {
           let { title, time, site } = stream;
-          let [ relativeTime, zone ] = time.split(" ");
-          return `<s>${title} <break /> at ${relativeTime} <say-as interpret-as="spell-out">${zone}</say-as> <break /> on ${site}.</s>`;
+          return `<s>${title} <break /> at ${time} <break /> on ${site}.</s>`;
         }).join("\n");
 
         response.say(`<p>There are ${streams.length || 'no'} streams today.</p>\n${streamText}`);
