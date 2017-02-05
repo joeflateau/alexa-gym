@@ -8,8 +8,8 @@ function setup(name) {
   app.intent('ListStreamsCommand', function(request,response) {
     getTodaysStreams()
       .then((streams) => {
-        let streamText = streams.map(stream => `${stream.title} at ${stream.time} on ${stream.site}`).join(". ");
-        response.say(`There are ${streams.length || 'no'} streams today. ${streamText}`);
+        let streamText = streams.map(stream => `<s>${stream.title} <break /> at ${stream.time} <break /> on ${stream.site}.</s>`).join("\n");
+        response.say(`<p>There are ${streams.length || 'no'} streams today.</p>\n${streamText}`);
         response.send();
       })
       .catch(err => {
