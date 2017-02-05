@@ -1,6 +1,6 @@
 {
   "name": "alexa-gym",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "alexa skill for college gymnastics",
   "main": "index.js",
   "scripts": {
