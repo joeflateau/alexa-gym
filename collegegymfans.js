@@ -1,5 +1,3 @@
-let debug = require('debug')('alexa-gym:gym');
-
 let cheerio = require('cheerio');
 let rp = require('request-promise');
 let URI = require('urijs');
@@ -15,10 +13,11 @@ function getTodaysStreams(){
     let grid = tableRows.get().slice(2).map(tr => {
       let tds = $(tr).children().get();
       let streamUrl = $(tds[3]).find("a").attr("href");
+      let time = $(tds[1]).text();
       let object = ({
         title: $(tds[0]).text(),
-        time: $(tds[1]).text(),
-        site: URI(streamUrl).hostname()
+        time: time,
+        site: URI(streamUrl).hostname().replace(/^www[.]/i, "")
       });
       return object;
     });
