@@ -9,8 +9,8 @@ function setup(name) {
     getTodaysStreams()
       .then((streams) => {
         let streamText = streams.map(stream => {
-          let { title, time, site } = stream;
-          return `<s>${title} <break /> at ${time} <break /> on ${site}.</s>`;
+          let { title, time } = stream;
+          return `<s>${title} <break /> at ${time}.</s>`;
         }).join("\n");
 
         response.say(`<p>There are ${streams.length || 'no'} streams today.</p>\n${streamText}`);
