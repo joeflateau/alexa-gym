@@ -1,0 +1,37 @@
+{
+  "name": "alexa-gym",
+  "version": "1.0.0",
+  "description": "alexa skill for college gymnastics",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeflateau/alexa-gym.git"
+  },
+  "keywords": [
+    "gymnastics",
+    "sports"
+  ],
+  "author": "Joe Flateau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeflateau/alexa-gym/issues"
+  },
+  "homepage": "https://github.com/joeflateau/alexa-gym#readme",
+  "dependencies": {
+    "alexa-app": "^2.4.0",
+    "bluebird": "^3.4.7",
+    "cheerio": "^0.22.0",
+    "debug": "^2.6.0",
+    "lodash": "^4.17.4",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "urijs": "^1.18.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
