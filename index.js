@@ -4,9 +4,9 @@ let getTodaysStreams = require('./collegegymfans.js').getTodaysStreams;
 
 function setup(name) {
   let app = new alexa.app(name);
-   
-  app.intent('ListStreamsCommand', function(request,response) {
-    getTodaysStreams()
+
+  function sayStreams(response){
+    return getTodaysStreams()
       .then((streams) => {
         let streamText = streams.map(stream => {
           let { title, time } = stream;
@@ -19,6 +19,16 @@ function setup(name) {
       .catch(err => {
         console.error(err);
       });
+  }
+   
+  app.launch(function(request,response) {
+      sayStreams(response);
+      return false;
+    }
+  );
+   
+  app.intent('ListStreamsCommand', function(request,response) {
+      sayStreams(response);
       return false;
     }
   );
