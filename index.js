@@ -2,6 +2,8 @@ let alexa = require('alexa-app');
 
 let getTodaysStreams = require('./collegegymfans.js').getTodaysStreams;
 
+let wrapAbbreviations = (title) => title.replace(/[A-Z]{2,}/g, "<say-as interpret-as='characters'>$&</say-as>");
+
 function setup(name) {
   let app = new alexa.app(name);
 
@@ -10,6 +12,7 @@ function setup(name) {
       .then((streams) => {
         let streamText = streams.map(stream => {
           let { title, time } = stream;
+          title = wrapAbbreviations(title);
           return `<s>${title} <break /> at ${time}.</s>`;
         }).join("\n");
 
